@@ -1,5 +1,8 @@
 module Entidade
 
+export EntDados
+export newEntDados
+
     using Dates
     #= biblioteca Dates importada para utilizar as funções de
     data e hora
@@ -12,7 +15,7 @@ module Entidade
     definidos em uma struct separada =#
     
     struct EntDados
-        id::Int32
+        id::Int64
     end
 
     #=

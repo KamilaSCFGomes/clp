@@ -1,28 +1,34 @@
-using .Entidade
+module Produto
+
+    include("Entidade.jl")
+    using .Entidade
 #=
 mutable string é uma string mutavel
 <: é utilizado para indicar hierarquia
 o atributo EntDados simula a herança =#
-    mutable struct Produto
+    mutable struct ProDados
         e::EntDados
         nome::String
-        valor::Float32
+        valor::Float64
     end
 
-    # sobrecarga da função newProduto:
-    newProduto() = Produto(newEntDados(), "", 0.0)
+    # sobrecarga da função newProDados:
+    newProDados() = ProDados(newEntDados(), "", 0.0)::ProDados
     
-    newProduto(nome::String, valor::Float32) = Produto(newEntDados(), nome, valor)
+    newProDados(nome::String, valor::Float64)::ProDados = ProDados(newEntDados(), nome, valor)
 
+    #a::ProDados = newProDados("Penis de 30cm",2.99)
+    #b = toString(a)
 
-    getNome(self::Produto) = self.nome
+    getNome(self::ProDados) = self.nome
     
-    getValor(self::Produto) = self.valor
+    getValor(self::ProDados) = self.valor
 
-    setNome(self::Produto, nome::String) = self.nome = nome
+    setNome(self::ProDados, nome::String) = self.nome = nome
     
-    setValor(self::Produto, valor::Float32) = self.valor = valor
+    setValor(self::ProDados, valor::Float64) = self.valor = valor
 
-    toString(self::Produto) = "$(toString(self.e))Nome: $(self.nome)\tValor:$(self.valor)"
+    toString(self::ProDados) = "$(toString(self.e))Nome: $(self.nome)\tValor:$(self.valor)"
 
+end
 # Próximo arquivo: Entidades/Totalizavel.jl
