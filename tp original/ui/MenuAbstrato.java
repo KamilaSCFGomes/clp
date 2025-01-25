@@ -17,12 +17,12 @@ public abstract class MenuAbstrato {
 
       System.out.print("INFORME A SUA OPCAO: ");
 
-      opcao = executarOpcao(scanner.nextInt(), scanner);
+      opcao = executarOpcao(scanner.nextInt(), scanner);  //duvida
 
     } while (opcao != 0);
   }
 
-  protected abstract int executarOpcao(int opcao, Scanner scanner);
+  protected abstract int executarOpcao(int opcao, Scanner scanner);  //duvida
 
   protected abstract void mostrarOpcoes();
 

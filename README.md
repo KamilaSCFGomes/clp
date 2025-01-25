@@ -13,6 +13,8 @@ Explicações sobre a linguagem foram adicionadas em forma de comentários ao lo
 
 1. Entidades/entidade.jl
 2. Entidades/produto.jl
+3. Entidades/totalizavel.jl
+4. Entidades/Venda.jl
 
 No fim de cada arquivo será indicado qual o arquivo seguinte a ser lido.
 
