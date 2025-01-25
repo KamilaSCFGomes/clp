@@ -1,4 +1,4 @@
-module Entidades 
+module Entidade
 
     using Dates
     #= biblioteca Dates importada para utilizar as funções de
@@ -10,8 +10,6 @@ module Entidades
     tipos abstratos permitem organização de uma hierarquia,
     mas eles não podem ter atributos então os atributos são
     definidos em uma struct separada =#
-
-    abstract type Entidade end
     
     struct EntDados
         id::Int32
@@ -37,7 +35,7 @@ module Entidades
 
     outra forma de declarar uma função:
     se o retorno não é especificado, será a última linha da função=#
-    function toString(self::Entidade)
+    function toString(self::EntDados)
         "Id: $(self.id)\t"
     end
 

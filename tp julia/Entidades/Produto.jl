@@ -1,10 +1,9 @@
-module Entidades  #equivalente a package em java
-
+using .Entidade
 #=
 mutable string é uma string mutavel
 <: é utilizado para indicar hierarquia
 o atributo EntDados simula a herança =#
-    mutable struct Produto <: Entidade
+    mutable struct Produto
         e::EntDados
         nome::String
         valor::Float32
@@ -12,7 +11,7 @@ o atributo EntDados simula a herança =#
 
     # sobrecarga da função newProduto:
     newProduto() = Produto(newEntDados(), "", 0.0)
-
+    
     newProduto(nome::String, valor::Float32) = Produto(newEntDados(), nome, valor)
 
 
@@ -20,17 +19,10 @@ o atributo EntDados simula a herança =#
     
     getValor(self::Produto) = self.valor
 
-    function setNome(self::Produto, nome::String)
-        self.nome = nome
-    end
-        
-    function setValor(self::Produto, valor::Float32)
-        self.valor = valor
-    end
-
+    setNome(self::Produto, nome::String) = self.nome = nome
     
-    toString(self::Produto) = "$(toString(self.e))Nome: $(self.nome)\tValor:$(self.valor)"
+    setValor(self::Produto, valor::Float32) = self.valor = valor
 
-end
+    toString(self::Produto) = "$(toString(self.e))Nome: $(self.nome)\tValor:$(self.valor)"
 
 # Próximo arquivo: Entidades/Totalizavel.jl

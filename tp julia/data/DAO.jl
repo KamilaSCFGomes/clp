@@ -26,7 +26,7 @@ module data
     end
 
     function remover(id::Int64, self::DAO)
-        filter!(e-> e.id != id, self.dados)
+        filter!(e-> e.getId() != id, self.dados)
     end
 
     function toString(self::DAO)

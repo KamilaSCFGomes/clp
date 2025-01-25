@@ -20,7 +20,7 @@ module ui
     seleção múltipla, mas a solução mais utilizada é uma sequência de estruturas
     de seleção de 2 caminhos (if-else) =#
 
-    function executarOpcao(opcao::Int, entrada::IO)
+    function executarOpcao(opcao::Int)
         if opcao == 0
             return 0
         elseif opcao == 1

@@ -2,20 +2,18 @@ module ui
     using data.DAOProduto
 
     struct MenuProduto <: MenuEntidade
-        dao::DAOProduto
+        dao::DAOProduto = DAOProduto.getInstance()
     end
-
-    dao = DAOProduto.getInstance()
         
     function mostrarTitulo()
         println("MENU PRODUTOS")
     end
 
-    function listar()
-        println(dao.toString())
+    function listar(self::MenuProdutoProduto)
+        println(self.dao.toString()) #refazer
     end
 
-    function adicionar()
+    function adicionar(self::Menu)roduto
         nome = nothing
         valor = 0.0
 
@@ -37,18 +35,18 @@ module ui
             end
         end
         
-        dao.adicionar(nome, valor) #REFAZER
+        self.dao.adicionar(nome, valor) #REFAZER
     end
 
-    function remover(menu::MenuProduto, entrada::IO)
-        nome = ""
+    function remover(self::MenuProduto)
+        nome = nothing
 
         while true
             try
                 println("\nDigite o nome: ")
-                nome = readline(entrada)
+                nome = readline()
 
-                if nome == "" || nome == nothing
+                if nome == "" || isnothing(nome)
                     throw(ArgumentError("\nFavor informar o nome corretamente.\n"))
                 else
                     break
@@ -58,7 +56,7 @@ module ui
             end
         end
 
-        menu.dao.remover(nome)
+        self.dao.remover(nome) #refazer
     end
 
 end

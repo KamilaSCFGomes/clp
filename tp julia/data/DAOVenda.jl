@@ -16,4 +16,18 @@ module data
     function adicionar(self::DAOVenda, p::Produto)
         push!(self.dao, p)
     end
+
+    function buscar(id::Int64, self::DAOVenda)
+        self.dao.buscar(id, self.dao);
+    end
+
+    function remover(id::Int64, self::DAOVenda)
+        self.dao.remover(id)
+    end
+
+    function toString(self::DAOVenda)
+        return self.dao.toString();
+    end
+
+    
 end

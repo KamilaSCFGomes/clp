@@ -18,7 +18,29 @@ module data
     end
 
     function buscar(id::Int64, self::DAOProduto)
-        self.dao.buscar(id, *);
+        self.dao.buscar(id, self.dao);
+    end
+
+    function buscar(nome::String, self::DAOProduto)
+        for p in self.dao.getDados()
+            if(p.getNome() == nome)
+                return p
+            end
+        end
+
+        return nothing
+    end
+
+    function remover(id::Int64, self::DAOProduto)
+        self.dao.remover(id)
+    end
+
+    function remover(nome::String, self::DAOProduto)
+        filter!(e -> e.getNome() != nome, self.getDados())
+    end
+
+    function toString(self::DAOProduto)
+        return self.dao.toString()
     end
 
 end
