@@ -28,7 +28,7 @@ module ModEntidade
     outra forma de declarar uma função:
     se o retorno não é especificado, será a última linha da função=#
     function toString(self::Entidade)
-        "Id: $(self.id)\t"
+        "Id: $(self.id)     "
     end
 end
 # Próximo arquivo: Entidades/Produto.jl

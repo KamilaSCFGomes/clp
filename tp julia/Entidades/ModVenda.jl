@@ -1,4 +1,4 @@
-module Venda
+module ModVenda
     using Dates
 
     mutable struct Venda <: Entidade <: Totalizavel

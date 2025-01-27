@@ -1,4 +1,4 @@
-module Totalizavel
+module ModTotalizavel
 
     #abstract type Totalizavel end
 
