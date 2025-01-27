@@ -1,4 +1,4 @@
-module Entidade
+module ModEntidade
     using Dates
     # biblioteca Dates importada para utilizar a função now
 
@@ -8,14 +8,14 @@ module Entidade
 
     tipagem paramétrica flexível: tipagem estática é opcional e
     tipos podem receber parâmetros, pode definir tamanhos =#
-    struct Entidadee
+    struct Entidade
         id:: Integer
     end
 
     #=
     declaração da função newEntidade de forma concisa:
     pega o tempo agora, converte para ms e utiliza o valor como id =#
-    newEntidade() = Entidadee(Dates.value(convert(Dates.Millisecond, Dates.now())))
+    newEntidade() = Entidade(Dates.value(convert(Dates.Millisecond, Dates.now())))
 
     #=
     função getId não é necessária, já que a estrutura é imutável
@@ -27,7 +27,7 @@ module Entidade
 
     outra forma de declarar uma função:
     se o retorno não é especificado, será a última linha da função=#
-    function toString(self::Entidadee)
+    function toString(self::Entidade)
         "Id: $(self.id)\t"
     end
 end

@@ -1,12 +1,12 @@
-    include("./Entidade.jl") #inclui o diretório do arquivo
-    using .Entidade: Entidadee, newEntidade, toString #especifica o que será usado
-    import .Entidade.toString # é necessário para executar a sobrecarga
+    include("./ModEntidade.jl") #inclui o diretório do arquivo
+    using .ModEntidade: Entidade, newEntidade, toString #especifica o que será usado
+    import .ModEntidade.toString # é necessário para executar a sobrecarga
 #=
 mutable string é uma string mutavel
 <: é utilizado para indicar hierarquia
 o atributo EntDados simula a herança =#
     mutable struct ProDados
-        e::Entidadee
+        e::Entidade
         nome::String
         valor::Float64
     end
