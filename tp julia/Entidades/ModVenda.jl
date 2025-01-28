@@ -1,13 +1,31 @@
 module ModVenda
+    include("./ModTotalizavel.jl")
+    include("./ModEntidade.jl")
+    include("./ModProduto.jl")
+    using .ModEntidade
+    using .ModTotalizavel
+    using .ModProduto
     using Dates
+    import .ModEntidade.toString, .ModTotalizavel.total
+    export Venda, toString, total, 
 
-    mutable struct Venda <: Entidade <: Totalizavel
-        e::EntDados
+    # Venda pracisa de ItemVenda, então a declaração precisa ocorrer primeiro
+
+    mutable struct ItemVenda
+        produto::Produto
+        qtd::Int
+        valor::Float32
+    end
+
+    newItemVenda(produto::Produto, qtd::Int) = ItemVenda(produto, qtd, produto.getValor())
+
+    mutable struct Venda <: Totalizavel
+        e::Entidade
         dataHora::DateTime
         itens::Vector{ItemVenda} #vetor de ItemVenda chamado itens
     end
     
-    newVenda() = Venda(newEntDados, now(), itens::Array)
+    newVenda() = Venda(newEntidade, now(), itens::Array)
     
     getDataHora(self::Venda) = self.dataHora
 
@@ -35,19 +53,9 @@ module ModVenda
         return t
     end
 
-    
-    
-    mutable struct ItemVenda
-        produto::Produto
-        qtd::Int
-        valor::Float32
-    end
-
-    newItemVenda(produto::Produto, qtd::Int) = ItemVenda(produto, qtd, produto.getValor())
-
     #=
-    funções com ! (por convenção) indicam que há efeito colateral
-    se não tiver !, a função retorna uma cópia modificada do original =#
+    funções com ! (por convenção) indicam que há efeito colateral se
+    não tiver !, a função retorna uma cópia modificada do dado original =#
 
     function adicionarItem!(self::Venda, produto::Produto, qtd::Int)
         push!(self.itens, ItemVenda(produto, qtd, produto.getValor))

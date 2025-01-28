@@ -1,11 +1,12 @@
 module ModProduto
-    include("./ModEntidade.jl") #inclui o diretório do arquivo
-        using .ModEntidade: Entidade, newEntidade, toString #especifica o que será usado
-        import .ModEntidade.toString # é necessário para executar a sobrecarga
+    include("./ModEntidade.jl") # inclui o diretório do arquivo
+    using .ModEntidade # especifica o módulo que será usado
+    import .ModEntidade.toString # é necessário para executar asobrecarga
+    export Produto, newProduto, getNome, getValor, setNome, setValor, toString
     #=
     mutable string é uma string mutavel
     <: é utilizado para indicar hierarquia
-    o atributo EntDados simula a herança =#
+    o atributo Entidados simula a herança =#
         mutable struct Produto
             e::Entidade
             nome::String
@@ -32,4 +33,4 @@ module ModProduto
 
         # Próximo arquivo: Entidades/Totalizavel.jl
 
-    end
+end

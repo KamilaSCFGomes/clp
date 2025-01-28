@@ -49,7 +49,7 @@ module ui
         print("\nDeseja adicionar outro produto à venda (1-SIM/0-NAO)? ")
 
         if(readline() != 1)
-            break
+            return
         end
 
         println("\n\nNOTA FISCAL\n" + venda.toString()) #refazer

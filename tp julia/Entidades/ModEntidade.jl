@@ -1,34 +1,39 @@
+# declarar o módulo e o nome, será utilizado para utilizar esse código
+# em outro arquivo
 module ModEntidade
+    # especificar o que poderá ser utilizado quando importar esse
+    # módulo em outro arquivo
+    export Entidade, newEntidade, getId, toString
+    # biblioteca Dates importada para utilizar as estruturas e funções
+    # de tempo e data
     using Dates
-    # biblioteca Dates importada para utilizar a função now
 
-    #=
-    struct é uma estrutura imutável, mutable struct é uma estrutura
-    mutável
+    #= struct é uma estrutura imutável,
+       mutable struct é uma estrutura mutável
 
     tipagem paramétrica flexível: tipagem estática é opcional e
-    tipos podem receber parâmetros, pode definir tamanhos =#
+    tipos podem receber parâmetros =#
     struct Entidade
         id:: Integer
     end
 
-    #=
-    declaração da função newEntidade de forma concisa:
-    pega o tempo agora, converte para ms e utiliza o valor como id =#
-    newEntidade() = Entidade(Dates.value(convert(Dates.Millisecond, Dates.now())))
+    #= declaração da função newEntidade:
+    pega o tempo agora, converte para ms e utiliza o valor como id
+    os parâmetros ficam na ordem dos atributos da struct =#
+    function newEntidade()
+        Entidade(Dates.value(convert(Dates.Millisecond, Dates.now())))
+    end
+    # se o retorno não é especificado, será a última sentença
 
-    #=
-    função getId não é necessária, já que a estrutura é imutável
-    mas permite ler seus valores =#
+    #= declarar uma função de forma concisa:
+    se o retorno não é especificado, será a última linha da função =#
+    getId(self::Entidade) = self.id
 
     #=
     para concatenar basta chamar a variável utilizando $, como em
-    Perl. Também realiza operações, ex "1 + 2 = $(1 + 2)"
+    Perl. Também realiza operações, ex "1 + 2 = $(1 + 2)" e funções =#
 
-    outra forma de declarar uma função:
-    se o retorno não é especificado, será a última linha da função=#
-    function toString(self::Entidade)
-        "Id: $(self.id)     "
-    end
+    toString(self::Entidade) = "Id: $(self.id)     "
 end
+
 # Próximo arquivo: Entidades/Produto.jl

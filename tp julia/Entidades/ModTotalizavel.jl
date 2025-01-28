@@ -1,6 +1,7 @@
 module ModTotalizavel
-
-    #abstract type Totalizavel end
+    export Totalizavel, total
+    
+    abstract type Totalizavel end
 
     function total(obj::Totalizavel)::Float32 # retorno da função deve ser Float32
         #avisa erro, caso tentativa de chamar sem implementação
