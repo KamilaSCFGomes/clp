@@ -7,14 +7,14 @@ module ModMenuVenda
     include("../Entidades/ModVenda.jl")
     using .ModMenuEntidade, .ModDAOProduto, .ModDAOVenda, .ModProduto, .ModVenda
 
-    export MenuVenda, newMenuVenuVenda
+    export MenuVenda, newMenuVenda
 
     struct MenuVenda <: MenuEntidade
         daoVenda::DAOVenda
         daoProduto::DAOProduto
     end
 
-    newMenuVenuVenda() = MenuVenda(getInstanceDAOVenda(), getInstanceDAOProduto())
+    newMenuVenda() = MenuVenda(getInstanceDAOVenda(), getInstanceDAOProduto())
 
     function mostrarTitulo()
         println("MENU PRODUTOS")

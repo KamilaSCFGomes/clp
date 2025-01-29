@@ -4,13 +4,14 @@ module ModMenuAbstrato
     
     abstract type MenuAbstrato end
     #uso de underscore/underline por convencao de protected
-    mostrarTitulo(self::MenuAbstrato) = throw(NotImplementedError("Função não implementada - ModMenuAbstrato.mostrarTitulo"))
 
-    mostrarOpcoes(self::MenuAbstrato) = throw(NotImplementedError("Função não implementada - ModMenuAbstrato.mostrarOpcoes"))
+    mostrarTitulo(self) = nothing
 
-    executarOpcao(self::MenuAbstrato, opcao::Int) = throw(NotImplementedError("Função não implementada - ModMenuAbstrato.executarOpcao"))
+    mostrarOpcoes(self) = nothing
 
-    function mostrarMenu(self::MenuAbstrato)
+    executarOpcao(self, opcao::Int) = nothing
+
+    function mostrarMenu(self)
         opcao = 0
 
         while true
@@ -26,7 +27,7 @@ module ModMenuAbstrato
             opcao = executarOpcao(self, parse(Int, readline()))
             
             # utilizando avaliação curto-circuito como condicional:
-            opcao != 0 || break 
+            opcao == 0 && break 
         end
     end
 

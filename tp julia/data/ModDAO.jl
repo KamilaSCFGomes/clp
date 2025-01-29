@@ -5,10 +5,10 @@ module ModDAO
 
     export DAO, getDados, adicionar, buscar, remover, toString
 
-    mutable struct DAO{E} <: EntidadeAbs
-        dados::Vector{E}
+    mutable struct DAO <: EntidadeAbs
+        dados::Vector
     end
-
+        
     getDados(self::DAO) = self.dados
 
     function adicionar(self::DAO, entidade)

@@ -8,7 +8,7 @@ module ModProduto
     mutable string é uma string mutavel
     <: é utilizado para indicar hierarquia
     o atributo Entidados simula a herança =#
-        mutable struct Produto <:EntidadeAbs
+        mutable struct Produto <: EntidadeAbs
             e::Entidade
             nome::String
             valor::Float64

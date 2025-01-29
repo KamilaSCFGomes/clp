@@ -6,20 +6,17 @@ module ModDAOProduto
     export DAOProduto, getInstanceDAOProduto, adicionar, buscar, remover, toString
 
     struct DAOProduto
-        instance::DAOProduto
-        dao::DAO{Produto}
-
-        function DAOProduto()
-            new(DAOProduto(), DAO{Produto}())
-        end
+        dao::DAO
     end
 
     const SGT_DAOPRODUTO = Ref{Union{Nothing, DAOProduto}}(nothing)
 
     function getInstanceDAOProduto()
-        if isnothing(SGT_DAOPRODUTO[])
-            # Cria a instância da DAOProduto se não existir
-            SGT_DAOPRODUTO[] = DAOProduto(DAO{Produto}())  # Ajuste conforme seu tipo de DAO
+        # == verifica se o valor dos operandos são iguais
+        # === verifica se os operandos são exatamente iguais
+        # ex: 1 == 1.0 é true, 1 === 1.0 é false
+        if SGT_DAOPRODUTO[] === nothing 
+            SGT_DAOPRODUTO[] = DAOProduto(DAO([]))
         end
         return SGT_DAOPRODUTO[]
     end

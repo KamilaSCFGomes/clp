@@ -14,19 +14,17 @@ module ModMenuPrincipal
     end
 
     function newMenuPrincipal() 
-        menu = MenuPrincipal(newMenuProduto(), newMenuVenda())
-        newMenuAbstrato(menu)
-        menu
+        MenuPrincipal(newMenuProduto(), newMenuVenda())
     end
 
     function executarOpcao(opcao::Int, self::MenuPrincipal)
         if opcao == 0
             return 0
         elseif opcao == 1
-            self.menuProduto.mostrarMenu()
+            mostrarMenu(self.menuProduto)
             return
         elseif opcao == 2
-            self.menuVenda.mostrarMenu()
+            mostrarMenu(self.menuVenda)
             return 1
         else #default
             println("OPCAO INVALIDA\n")
@@ -35,7 +33,7 @@ module ModMenuPrincipal
         return 1
     end
 
-    function mostrarOpcoes()
+    function mostrarOpcoes(::MenuPrincipal)
         println("0 -> FECHAR PROGRAMA")
         println("1 -> PRODUTO")
         println("2 -> VENDA")

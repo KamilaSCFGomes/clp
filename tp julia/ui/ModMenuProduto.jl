@@ -10,7 +10,7 @@ module ModMenuProduto
         dao::DAOProduto
     end
 
-    newMenuProduto() = MenuProduto(getInstanceDAOProduto)
+    newMenuProduto() = MenuProduto(getInstanceDAOProduto())
         
     function mostrarTitulo()
         println("MENU PRODUTOS")
