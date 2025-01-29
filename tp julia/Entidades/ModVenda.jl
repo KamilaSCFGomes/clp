@@ -28,7 +28,7 @@ module ModVenda
         _itens::Vector{ItemVenda} #vetor de ItemVenda chamado itens
     end
     
-    newVenda() = Venda(newEntidade, now(), _itens::Vector{ItemVenda})
+    newVenda() = Venda(newEntidade(), now(),ItemVenda[])
     
     getDataHora(self::Venda) = self._dataHora
 
@@ -61,7 +61,7 @@ module ModVenda
     não tiver !, a função retorna uma cópia modificada do dado original =#
 
     function adicionarItem!(self::Venda, produto::Produto, qtd::Int)
-        push!(self._itens, ItemVenda(produto, qtd, produto.getValor))
+        push!(self._itens, ItemVenda(produto, qtd, getValor(produto)))
     end
 
     function removerItem!(self::Venda, posicao::Int)
