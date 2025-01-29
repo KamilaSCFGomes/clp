@@ -1,7 +1,8 @@
 module ModDAOProduto
-    include("../Entidades/ModProduto.jl") 
-    using Entidades.ModProduto
-    import .toString
+    include("../Entidades/ModProduto.jl")
+    include("./ModDAO.jl")
+    using .ModProduto, .ModDAO
+    import .ModDAO.toString
     export DAOProduto, getInstance, adicionar, buscar, remover, toString
 
     struct DAOProduto
@@ -41,8 +42,6 @@ module ModDAOProduto
         filter!(e -> e.getNome() != nome, self.getDados())
     end
 
-    function toString(self::DAOProduto)
-        return self._dao.toString()
-    end
+    toString(self::DAOProduto) = toString(self._dao)
 
 end

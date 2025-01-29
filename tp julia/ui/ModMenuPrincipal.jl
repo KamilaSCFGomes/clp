@@ -3,7 +3,7 @@ module ModMenuPrincipal
     include("./ModMenuProduto.jl")
     include("./ModMenuVenda.jl")
     using .ModMenuAbstrato, .ModMenuProduto, .ModMenuVenda
-    import .mostrarTitulo
+    import ModMenuAbstrato.mostrarTitulo
 
     struct MenuPrincipal <: MenuAbstrato
         _menuProduto::MenuProduto

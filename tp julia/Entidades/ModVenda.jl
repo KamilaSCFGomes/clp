@@ -28,7 +28,7 @@ module ModVenda
         _itens::Vector{ItemVenda} #vetor de ItemVenda chamado itens
     end
     
-    newVenda() = Venda(newEntidade(), now(),ItemVenda[])
+    newVenda() = Venda(newEntidade(), now(), ItemVenda[])
     
     getDataHora(self::Venda) = self._dataHora
 

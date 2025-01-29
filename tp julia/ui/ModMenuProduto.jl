@@ -1,12 +1,12 @@
 module ModMenuProduto
     include("../Entidades/ModEntidade.jl")
     include("../data/ModDAOProduto.jl")
-    using ModEntidade, .DAOProduto
+    using .ModEntidade, .ModDAOProduto
     import .mostrarTitulo, .listar, .adicionar, .remover
     export MenuProduto
 
     struct MenuProduto <: MenuEntidade
-        _dao::DAOProduto = DAOProduto.getInstance() # não tem essa função, n sei oq ela faz
+        _dao::DAOProduto
     end
         
     function _mostrarTitulo()

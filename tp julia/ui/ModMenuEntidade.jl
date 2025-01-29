@@ -1,10 +1,10 @@
 module ModMenuEntidade
     include("./ModMenuAbstrato.jl")
     using .ModMenuAbstrato
-    import .executarOpcao
+    import ._executarOpcao
 
-    export MenuEntidade
-
+    export MenuEntidade, _executarOpcao
+    
     struct MenuEntidade <: MenuAbstrato end
 
     _listar() = throw(NotImplementedError("Função não implementada - ModMenuEntidade.listar"))
@@ -18,7 +18,7 @@ module ModMenuEntidade
     seleção múltipla, mas a solução mais utilizada é uma sequência de estruturas
     de seleção de 2 caminhos (if-else) =#
 
-    function _executarOpcao(opcao::Int)
+    function _executarOpcao(menu::MenuAbstrato,opcao::Int)
         if opcao == 0
             return 0
         elseif opcao == 1

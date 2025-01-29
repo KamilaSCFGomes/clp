@@ -1,5 +1,5 @@
 module ModMenuAbstrato
-    export MenuAbstrato, mostrarMenu
+    export MenuAbstrato, mostrarMenu, _mostrarTitulo, _mostrarOpcoes, _executarOpcao
 
     
     abstract type MenuAbstrato end

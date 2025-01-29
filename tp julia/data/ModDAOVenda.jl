@@ -1,7 +1,9 @@
 module ModDAOVenda
-    include("../Entidades/ModVenda.jl") 
-    using Entidades.Venda
-    import .toString
+    include("../Entidades/ModVenda.jl")
+    include("../Entidades/ModProduto.jl")
+    include("./ModDAO.jl")
+    using .ModVenda, .ModDAO, .ModProduto
+    import .ModDAO.toString
     export DAOVenda, getInstance, adicionar, buscar, remover, toString
 
     struct DAOVenda
@@ -27,9 +29,6 @@ module ModDAOVenda
         self._dao.remover(id)
     end
 
-    function toString(self::DAOVenda)
-        return self._dao.toString();
-    end
-
+    toString(self::DAOVenda) = self._dao.toString()
     
 end
