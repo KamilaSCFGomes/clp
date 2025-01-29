@@ -1,14 +1,14 @@
 module ModMenuAbstrato
-    export MenuAbstrato, mostrarMenu, _mostrarTitulo, _mostrarOpcoes, _executarOpcao
+    export MenuAbstrato, mostrarMenu, mostrarTitulo, mostrarOpcoes, executarOpcao
 
     
     abstract type MenuAbstrato end
     #uso de underscore/underline por convencao de protected
-    _mostrarTitulo(self::MenuAbstrato) = throw(NotImplementedError("Função não implementada - ModMenuAbstrato.mostrarTitulo"))
+    mostrarTitulo(self::MenuAbstrato) = throw(NotImplementedError("Função não implementada - ModMenuAbstrato.mostrarTitulo"))
 
-    _mostrarOpcoes(self::MenuAbstrato) = throw(NotImplementedError("Função não implementada - ModMenuAbstrato.mostrarOpcoes"))
+    mostrarOpcoes(self::MenuAbstrato) = throw(NotImplementedError("Função não implementada - ModMenuAbstrato.mostrarOpcoes"))
 
-    _executarOpcao(self::MenuAbstrato, opcao::Int) = throw(NotImplementedError("Função não implementada - ModMenuAbstrato.executarOpcao"))
+    executarOpcao(self::MenuAbstrato, opcao::Int) = throw(NotImplementedError("Função não implementada - ModMenuAbstrato.executarOpcao"))
 
     function mostrarMenu(self::MenuAbstrato)
         opcao = 0
@@ -16,14 +16,14 @@ module ModMenuAbstrato
         while true
             println("\n\n\n")
 
-            _mostrarTitulo(self)
-            _mostrarOpcoes(self)
+            mostrarTitulo(self)
+            mostrarOpcoes(self)
 
             print("INFORME A SUA OPCAO: ")
 
             # readline lê uma linha no terminal
             # parse converte números em uma stirng para o tipo especificado
-            opcao = _executarOpcao(self, parse(Int, readline()))
+            opcao = executarOpcao(self, parse(Int, readline()))
             
             # utilizando avaliação curto-circuito como condicional:
             opcao != 0 || break 

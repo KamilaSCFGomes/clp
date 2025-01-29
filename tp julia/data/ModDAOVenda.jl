@@ -4,31 +4,34 @@ module ModDAOVenda
     include("./ModDAO.jl")
     using .ModVenda, .ModDAO, .ModProduto
     import .ModDAO.toString
-    export DAOVenda, getInstance, adicionar, buscar, remover, toString
+    export DAOVenda, getInstanceDAOVenda, adicionar, buscar, remover, toString
 
     struct DAOVenda
-        _instance::DAOVenda
-        _dao::DAO{Venda}
-    
-        function DAOProduto()
-            new(DAOProduto(), DAO{Produto}())
-        end
+        dao::DAO{Venda}
     end
 
-    getInstance(self::DAOVenda) = self._instance
+    const SGT_DAOVENDA = Ref{Union{Nothing, DAOVenda}}(nothing)
+
+    function getInstanceDAOVenda()
+        if isnothing(SGT_DAOVENDA[])
+            # Cria a instância da DAOVenda se não existir
+            SGT_DAOVENDA[] = DAOVenda(DAO{Venda}())  # Ajuste conforme seu tipo de DAO
+        end
+        return SGT_DAOVENDA[]
+    end
 
     function adicionar(self::DAOVenda, p::Produto)
-        push!(self._dao, p)
+        push!(self.dao, p)
     end
 
     function buscar(id::Int64, self::DAOVenda)
-        self._dao.buscar(id, self._dao);
+        self.dao.buscar(id, self.dao);
     end
 
     function remover(id::Int64, self::DAOVenda)
-        self._dao.remover(id)
+        self.dao.remover(id)
     end
 
-    toString(self::DAOVenda) = self._dao.toString()
+    toString(self::DAOVenda) = self.dao.toString()
     
 end

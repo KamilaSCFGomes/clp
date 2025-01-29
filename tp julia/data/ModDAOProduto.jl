@@ -3,29 +3,37 @@ module ModDAOProduto
     include("./ModDAO.jl")
     using .ModProduto, .ModDAO
     import .ModDAO.toString
-    export DAOProduto, getInstance, adicionar, buscar, remover, toString
+    export DAOProduto, getInstanceDAOProduto, adicionar, buscar, remover, toString
 
     struct DAOProduto
-        _instance::DAOProduto
-        _dao::DAO{Produto}
+        instance::DAOProduto
+        dao::DAO{Produto}
 
         function DAOProduto()
             new(DAOProduto(), DAO{Produto}())
         end
     end
 
-    getInstance(self::DAOProduto) = self._instance
+    const SGT_DAOPRODUTO = Ref{Union{Nothing, DAOProduto}}(nothing)
+
+    function getInstanceDAOProduto()
+        if isnothing(SGT_DAOPRODUTO[])
+            # Cria a instância da DAOProduto se não existir
+            SGT_DAOPRODUTO[] = DAOProduto(DAO{Produto}())  # Ajuste conforme seu tipo de DAO
+        end
+        return SGT_DAOPRODUTO[]
+    end
 
     function adicionar(self::DAOProduto, p::Produto)
-        push!(self._dao, p)
+        push!(self.dao, p)
     end
 
     function buscar(id::Int64, self::DAOProduto)
-        self._dao.buscar(id, self._dao);
+        self.dao.buscar(id, self.dao);
     end
 
     function buscar(nome::String, self::DAOProduto)
-        for p in self._dao.getDados()
+        for p in self.dao.getDados()
             if(p.getNome() == nome)
                 return p
             end
@@ -35,13 +43,13 @@ module ModDAOProduto
     end
 
     function remover(id::Int64, self::DAOProduto)
-        self._dao.remover(id)
+        self.dao.remover(id)
     end
 
     function remover(nome::String, self::DAOProduto)
         filter!(e -> e.getNome() != nome, self.getDados())
     end
 
-    toString(self::DAOProduto) = toString(self._dao)
+    toString(self::DAOProduto) = toString(self.dao)
 
 end

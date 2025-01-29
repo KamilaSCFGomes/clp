@@ -1,23 +1,26 @@
 module ModMenuProduto
     include("../Entidades/ModEntidade.jl")
     include("../data/ModDAOProduto.jl")
-    using .ModEntidade, .ModDAOProduto
+    include("./ModMenuEntidade.jl")
+    using .ModEntidade, .ModDAOProduto, .ModMenuEntidade
     import .mostrarTitulo, .listar, .adicionar, .remover
-    export MenuProduto
+    export MenuProduto, newMenuProduto
 
     struct MenuProduto <: MenuEntidade
-        _dao::DAOProduto
+        dao::DAOProduto
     end
+
+    newMenuProduto() = MenuProduto(getInstanceDAOProduto)
         
-    function _mostrarTitulo()
+    function mostrarTitulo()
         println("MENU PRODUTOS")
     end
 
-    function _listar(self::MenuProduto)
-        println(self._dao.toString()) #refazer
+    function listar(self::MenuProduto)
+        println(self.dao.toString()) 
     end
 
-    function _adicionar(self::MenuProduto)
+    function adicionar(self::MenuProduto)
         nome = nothing
         valor = 0.0
 
@@ -40,10 +43,10 @@ module ModMenuProduto
             end
         end
         
-        self._dao.adicionar(nome, valor) #REFAZER
+        self.dao.adicionar(nome, valor) 
     end
 
-    function _remover(self::MenuProduto)
+    function remover(self::MenuProduto)
         nome = nothing
 
         while true
@@ -61,7 +64,7 @@ module ModMenuProduto
             end
         end
 
-        self._dao.remover(nome) #refazer
+        self.dao.remover(nome) 
     end
 
 end

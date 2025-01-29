@@ -16,7 +16,7 @@ module ModEntidade
     abstract type EntidadeAbs end
 
     struct Entidade
-        _id :: Integer
+        id :: Integer
     end
     #=  :: ("é uma instância de") especifica o tipo e garante que o
     programa funiconará como o esperado. Dependendo da situação,
@@ -32,13 +32,13 @@ module ModEntidade
 
     #= declarar uma função de forma concisa:
     se o retorno não é especificado, será a última linha da função =#
-    getId(self::Entidade) = self._id
+    getId(self::Entidade) = self.id
 
     #=
     para concatenar basta chamar a variável utilizando $, como em
     Perl. Também realiza operações, ex "1 + 2 = $(1 + 2)" e funções =#
 
-    toString(self::Entidade) = "Id: $(self._id)     "
+    toString(self::Entidade) = "Id: $(self.id)     "
 end
 
 # Próximo arquivo: Entidades/Produto.jl

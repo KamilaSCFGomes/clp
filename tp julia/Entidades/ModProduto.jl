@@ -10,8 +10,8 @@ module ModProduto
     o atributo Entidados simula a herança =#
         mutable struct Produto <:EntidadeAbs
             e::Entidade
-            _nome::String
-            _valor::Float64
+            nome::String
+            valor::Float64
         end
 
         # envio dinâmico da função newProduto:
@@ -21,16 +21,16 @@ module ModProduto
         de compilação, enquanto o envio dinâmico é resolvido em tempo de
         execução =#
 
-        getNome(self::Produto) = self._nome
+        getNome(self::Produto) = self.nome
         
-        getValor(self::Produto) = self._valor
+        getValor(self::Produto) = self.valor
 
-        setNome(self::Produto, nome::String) = self._nome = nome
+        setNome(self::Produto, nome::String) = self.nome = nome
         
-        setValor(self::Produto, valor::Float64) = self._valor = valor
+        setValor(self::Produto, valor::Float64) = self.valor = valor
 
         # sobrecarga de toString
-        toString(self::Produto) = "$(toString(self.e))Nome: $(self._nome)       Valor:$(self._valor)"
+        toString(self::Produto) = "$(toString(self.e))Nome: $(self.nome)       Valor:$(self.valor)"
 
         # Próximo arquivo: Entidades/Totalizavel.jl
 

@@ -5,32 +5,27 @@ module ModMenuVenda
     include("../data/ModDAOVenda.jl")
     include("../Entidades/ModProduto.jl")
     include("../Entidades/ModVenda.jl")
+    using .ModMenuEntidade, .ModDAOProduto, .ModDAOVenda, .ModProduto, .ModVenda
 
-    using ModMenuEntidade
-    
-    using data.DAOProduto
-    using data.DAOVenda
-
-    using Entidades.Produto
-    using Entidades.Venda
-
-    export MenuVenda, _mostrarTitulo, _listar, _adicionar, _remover
+    export MenuVenda, newMenuVenuVenda
 
     struct MenuVenda <: MenuEntidade
-        _daoVenda::DAOVenda = DAOVenda.getInstance()
-        _daoProduto::DAOProduto = DAOProduto.getInstance()
+        daoVenda::DAOVenda
+        daoProduto::DAOProduto
     end
 
-    function _mostrarTitulo()
+    newMenuVenuVenda() = MenuVenda(getInstanceDAOVenda(), getInstanceDAOProduto())
+
+    function mostrarTitulo()
         println("MENU PRODUTOS")
     end
 
-    function _listar(self::MenuEntidade)
-        println(self._daoVenda.toString()) #refazer
+    function listar(self::MenuEntidade)
+        println(self.daoVenda.toString()) #refazer
     end
     
 
-    function _adicionar(self::MenuEntidade)
+    function adicionar(self::MenuEntidade)
         produto::Produto
         venda::Venda
         qtd = 0
@@ -39,7 +34,7 @@ module ModMenuVenda
             while true
                 try
                     println("\nDigite o nome do produto: ")
-                    produto = self._daoProduto.buscar(readline())
+                    produto = self.daoProduto.buscar(readline())
 
                     println("Digite a quantidade: ")
                     qtd = parse(Int, readline())
@@ -65,10 +60,10 @@ module ModMenuVenda
 
         println("\n\nNOTA FISCAL\n" + venda.toString()) #refazer
 
-        self._daoVenda.adicionar(venda)  #refazer
+        self.daoVenda.adicionar(venda)  #refazer
     end
 
-    function _remover(self::MenuVenda)
+    function remover(self::MenuVenda)
         id :: Int64 = 0 
 
         while true
@@ -86,6 +81,6 @@ module ModMenuVenda
             end
         end
 
-        self._daoVenda.remover(id) #refazer
+        self.daoVenda.remover(id) #refazer
     end
 end
