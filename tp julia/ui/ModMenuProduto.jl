@@ -1,19 +1,23 @@
-module ui
-    using data.DAOProduto
+module ModMenuProduto
+    include("../Entidades/ModEntidade.jl")
+    include("../data/ModDAOProduto.jl")
+    using ModEntidade, .DAOProduto
+    import .mostrarTitulo, .listar, .adicionar, .remover
+    export MenuProduto
 
     struct MenuProduto <: MenuEntidade
-        dao::DAOProduto = DAOProduto.getInstance()
+        _dao::DAOProduto = DAOProduto.getInstance() # não tem essa função, n sei oq ela faz
     end
         
-    function mostrarTitulo()
+    function _mostrarTitulo()
         println("MENU PRODUTOS")
     end
 
-    function listar(self::MenuProdutoProduto)
-        println(self.dao.toString()) #refazer
+    function _listar(self::MenuProduto)
+        println(self._dao.toString()) #refazer
     end
 
-    function adicionar(self::Menu)roduto
+    function _adicionar(self::MenuProduto)
         nome = nothing
         valor = 0.0
 
@@ -25,6 +29,7 @@ module ui
                 println("Digite o valor: ")
                 valor = parse(Float64, readline())
 
+                # isnothing(nome) equivale a nome == null em outras linguagens
                 if isnothing(nome) || nome == "" || valor <= 0.0
                     throw(ArgumentError("\nFavor informar os dados corretamente.\n"))
                 else
@@ -35,10 +40,10 @@ module ui
             end
         end
         
-        self.dao.adicionar(nome, valor) #REFAZER
+        self._dao.adicionar(nome, valor) #REFAZER
     end
 
-    function remover(self::MenuProduto)
+    function _remover(self::MenuProduto)
         nome = nothing
 
         while true
@@ -56,7 +61,7 @@ module ui
             end
         end
 
-        self.dao.remover(nome) #refazer
+        self._dao.remover(nome) #refazer
     end
 
 end

@@ -1,9 +1,9 @@
 # declarar o módulo e o nome, será utilizado para utilizar esse código
 # em outro arquivo
-module ModEntidade
+module ModEntidade 
     # especificar o que poderá ser utilizado quando importar esse
     # módulo em outro arquivo
-    export Entidade, newEntidade, getId, toString
+    export Entidade, newEntidade, getId, toString, EntidadeAbs
     # biblioteca Dates importada para utilizar as estruturas e funções
     # de tempo e data
     using Dates
@@ -13,11 +13,16 @@ module ModEntidade
 
     tipagem paramétrica flexível: tipagem estática é opcional e
     tipos podem receber parâmetros =#
-    struct Entidade
-        id:: Integer
-    end
+    abstract type EntidadeAbs end
 
-    #= declaração da função newEntidade:
+    struct Entidade
+        _id :: Integer
+    end
+    #=  :: ("é uma instância de") especifica o tipo e garante que o
+    programa funiconará como o esperado. Dependendo da situação,
+    pode melhorar o desempenho do código
+
+    declaração da função newEntidade:
     pega o tempo agora, converte para ms e utiliza o valor como id
     os parâmetros ficam na ordem dos atributos da struct =#
     function newEntidade()
@@ -27,13 +32,13 @@ module ModEntidade
 
     #= declarar uma função de forma concisa:
     se o retorno não é especificado, será a última linha da função =#
-    getId(self::Entidade) = self.id
+    getId(self::Entidade) = self._id
 
     #=
     para concatenar basta chamar a variável utilizando $, como em
     Perl. Também realiza operações, ex "1 + 2 = $(1 + 2)" e funções =#
 
-    toString(self::Entidade) = "Id: $(self.id)     "
+    toString(self::Entidade) = "Id: $(self._id)     "
 end
 
 # Próximo arquivo: Entidades/Produto.jl

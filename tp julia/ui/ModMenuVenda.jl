@@ -1,25 +1,36 @@
-module ui
+module ModMenuVenda
+
+    include("./ModMenuEntidade.jl")
+    include("../data/ModDAOProduto.jl")
+    include("../data/ModDAOVenda.jl")
+    include("../Entidades/ModProduto.jl")
+    include("../Entidades/ModVenda.jl")
+
+    using ModMenuEntidade
+    
     using data.DAOProduto
     using data.DAOVenda
 
     using Entidades.Produto
     using Entidades.Venda
 
+    export MenuVenda, _mostrarTitulo, _listar, _adicionar, _remover
+
     struct MenuVenda <: MenuEntidade
-        daoVenda::DAOVenda = DAOVenda.getInstance()
-        daoProduto::DAOProduto = DAOProduto.getInstance()
+        _daoVenda::DAOVenda = DAOVenda.getInstance()
+        _daoProduto::DAOProduto = DAOProduto.getInstance()
     end
 
-    function mostrarTitulo()
+    function _mostrarTitulo()
         println("MENU PRODUTOS")
     end
 
-    function listar(self::MenuEntidade)
-        println(self.daoVenda.toString()) #refazer
+    function _listar(self::MenuEntidade)
+        println(self._daoVenda.toString()) #refazer
     end
     
 
-    function adicionar(self::MenuEntidade)
+    function _adicionar(self::MenuEntidade)
         produto::Produto
         venda::Venda
         qtd = 0
@@ -28,7 +39,7 @@ module ui
             while true
                 try
                     println("\nDigite o nome do produto: ")
-                    produto = self.daoProduto.buscar(readline())
+                    produto = self._daoProduto.buscar(readline())
 
                     println("Digite a quantidade: ")
                     qtd = parse(Int, readline())
@@ -54,10 +65,10 @@ module ui
 
         println("\n\nNOTA FISCAL\n" + venda.toString()) #refazer
 
-        self.daoVenda.adicionar(venda)  #refazer
+        self._daoVenda.adicionar(venda)  #refazer
     end
 
-    function remover(self::MenuVenda)
+    function _remover(self::MenuVenda)
         id :: Int64 = 0 
 
         while true
@@ -75,6 +86,6 @@ module ui
             end
         end
 
-        self.daoVenda.remover(id) #refazer
+        self._daoVenda.remover(id) #refazer
     end
 end

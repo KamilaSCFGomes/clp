@@ -7,46 +7,49 @@ module ModVenda
     using .ModProduto
     using Dates
     import .ModEntidade.toString, .ModTotalizavel.total
-    export Venda, toString, total, 
+    export Venda, getDataHora, getItens, toString, adicionarItem!, removerItem!, total, getProduto
 
-    # Venda pracisa de ItemVenda, então a declaração precisa ocorrer primeiro
+    # Venda precisa de ItemVenda, então a declaração precisa ocorrer primeiro
 
     mutable struct ItemVenda
-        produto::Produto
-        qtd::Int
-        valor::Float32
+        _produto::Produto
+        _qtd::Int
+        _valor::Float64
     end
 
-    newItemVenda(produto::Produto, qtd::Int) = ItemVenda(produto, qtd, produto.getValor())
+    function newItemVenda(produto::Produto, qtd::Int)
+        valor=getValor(produto)
+        ItemVenda(produto, qtd, valor)
+    end 
 
-    mutable struct Venda <: Totalizavel
+    mutable struct Venda <: EntidadeAbs
         e::Entidade
-        dataHora::DateTime
-        itens::Vector{ItemVenda} #vetor de ItemVenda chamado itens
+        _dataHora::DateTime
+        _itens::Vector{ItemVenda} #vetor de ItemVenda chamado itens
     end
     
-    newVenda() = Venda(newEntidade, now(), itens::Array)
+    newVenda() = Venda(newEntidade, now(), _itens::Vector{ItemVenda})
     
-    getDataHora(self::Venda) = self.dataHora
+    getDataHora(self::Venda) = self._dataHora
 
-    getItens(self::Venda) = self.itens
+    getItens(self::Venda) = self._itens
 
     function toString(self::Venda)
         #concatenação de strings por interpolação
         s = "$(self.e.toString())Data-Hora: $(self.dataHora)\nItens:\n"
 
-        for i in self.itens 
+        for i in self._itens
             #concatenação utilizando *
             s *= "\n " * i.toString()
         end
 
-        s *= "\nTOTAL: " * self.total
+        s *= "\nTOTAL: " * total(self)
     end
 
     function total(self::Venda)::Float64 
         t = 0.0
 
-        for item in self.itens
+        for item in self._itens
             t += item.valor * item.qtd
         end
         
@@ -58,11 +61,11 @@ module ModVenda
     não tiver !, a função retorna uma cópia modificada do dado original =#
 
     function adicionarItem!(self::Venda, produto::Produto, qtd::Int)
-        push!(self.itens, ItemVenda(produto, qtd, produto.getValor))
+        push!(self._itens, ItemVenda(produto, qtd, produto.getValor))
     end
 
-    function removerItem!(posicao::Int)
-        deleteat!(self.itens, posicao)
+    function removerItem!(self::Venda, posicao::Int)
+        deleteat!(self._itens, posicao)
         #pop!(self.itens, posicao)
     end
     
@@ -70,14 +73,14 @@ module ModVenda
     filter cria uma nova lista com itens de nome != do parametro, 
     percorrendo todos os itens da lista =# 
 
-    function removerItem!(nomeProduto::String)
-        self.itens = filter(i->i.produto.nome == nomeProduto, self.itens)
+    function removerItem!(self::Venda, nomeProduto::String)
+        self._itens = filter(i->i.produto.nome == nomeProduto, self._itens)
     end 
 
-    getProduto(self::ItemVenda) = self.produto
+    getProduto(self::ItemVenda) = self._produto
     
     function toString(self::ItemVenda)
-        "$(self.produto.getNome()) $(self.valor) $(self.qtd) $(self.valor * self.qtd)"
+        "$(self.produto.getNome()) $(self._valor) $(self._qtd) $(self._valor * self._qtd)"
     end
     
 end

@@ -1,22 +1,26 @@
-module data
+module ModDAO
+    include("../Entidades/ModEntidade.jl") 
     using Entidades.Entidade
+    import .toString
+
+    export DAO, getDados, adicionar, buscar, remover, toString
 
     mutable struct DAO{E <: Entidade}
-        dados::Vector{E}
+        _dados::Vector{E}
         
         function DAO{E}() where E
             new{E}(Vector{E}())
         end
     end
-    
-    getDados(self::DAO) = self.dados
+
+    getDados(self::DAO) = self._dados
 
     function adicionar(self::DAO, entidade::E)
-        push!(self.dados, entidade)
+        push!(self._dados, entidade)
     end
 
     function buscar(id::Int64, self::DAO)
-        for p in self.dados
+        for p in self._dados
             if(p.getId(p) == id)
                 return p
             end
@@ -26,13 +30,13 @@ module data
     end
 
     function remover(id::Int64, self::DAO)
-        filter!(e-> e.getId() != id, self.dados)
+        filter!(e-> e.getId() != id, self._dados)
     end
 
     function toString(self::DAO)
         s = ""
 
-        for e in self.dados
+        for e in self._dados
             s *= "\n" * e.toString()
         end
     end
