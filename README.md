@@ -11,10 +11,13 @@ Linguagem utilizada: Julia
 
 Explicações sobre a linguagem foram adicionadas em forma de comentários ao longo do código. Para melhor entendimento, recomenda-se ler os arquivos na seguinte ordem:
 
-1. Entidades/entidade.jl
-2. Entidades/produto.jl
-3. Entidades/totalizavel.jl
-4. Entidades/Venda.jl
+1. Entidades/ModEntidade.jl
+2. Entidades/ModProduto.jl
+3. Entidades/ModVenda.jl
+4. data/ModDAO.jl
+5. data/ModDAOProduto.jl
+6. ui/ModVenda.jl
+7. Main.jl
 
 No fim de cada arquivo será indicado qual o arquivo seguinte a ser lido.
 

@@ -9,6 +9,9 @@ module ModDAOProduto
         dao::DAO
     end
 
+    # definição de um singleton:
+    # é uma constante que armazena uma referência para um objeto
+    # que pode ser nada ou uma instância de DAOProduto
     const SGT_DAOPRODUTO = Ref{Union{Nothing, DAOProduto}}(nothing)
 
     function getInstanceDAOProduto()
@@ -16,6 +19,7 @@ module ModDAOProduto
         # === verifica se os operandos são exatamente iguais
         # ex: 1 == 1.0 é true, 1 === 1.0 é false
         if SGT_DAOPRODUTO[] === nothing 
+            # se o singleton não foi instanciado, cria uma nova instância
             SGT_DAOPRODUTO[] = DAOProduto(DAO([]))
         end
         return SGT_DAOPRODUTO[]
@@ -31,11 +35,10 @@ module ModDAOProduto
 
     function buscar(nome::String, self::DAOProduto)
         for p in self.dao.getDados()
-            if(p.getNome() == nome)
-                return p
-            end
+            # utilizando avaliação curto-circuito
+            # como estrutura de controle:
+            getNome(p) == nome && return p
         end
-
         return nothing
     end
 
@@ -50,3 +53,5 @@ module ModDAOProduto
     toString(self::DAOProduto) = toString(self.dao)
 
 end
+
+# Próximo arquivo: ui/ModMenuEntidade.jl

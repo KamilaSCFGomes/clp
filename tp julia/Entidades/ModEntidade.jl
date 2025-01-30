@@ -24,21 +24,19 @@ module ModEntidade
 
     declaração da função newEntidade:
     pega o tempo agora, converte para ms e utiliza o valor como id
-    os parâmetros ficam na ordem dos atributos da struct =#
+    os parâmetros ficam na ordem dos atributos da struct.
+    se o retorno não é especificado, será a última linha da função =#
     function newEntidade()
         Entidade(Dates.value(convert(Dates.Millisecond, Dates.now())))
     end
-    # se o retorno não é especificado, será a última sentença
-
-    #= declarar uma função de forma concisa:
-    se o retorno não é especificado, será a última linha da função =#
+    #= se o retorno não é especificado, será a última sentença
+    declarar uma função de forma concisa: =#
     getId(self::Entidade) = self.id
 
-    #=
-    para concatenar basta chamar a variável utilizando $, como em
+    #= para concatenar basta chamar a variável utilizando $, como em
     Perl. Também realiza operações, ex "1 + 2 = $(1 + 2)" e funções =#
 
     toString(self::Entidade) = "Id: $(self.id)     "
 end
 
-# Próximo arquivo: Entidades/Produto.jl
+# Próximo arquivo: Entidades/ModProduto.jl

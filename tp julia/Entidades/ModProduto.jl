@@ -1,7 +1,7 @@
 module ModProduto
     include("./ModEntidade.jl") # inclui o diretório do arquivo
     using .ModEntidade # especifica o módulo que será usado
-    import .toString # é necessário para executar asobrecarga
+    import .toString # é necessário para executar a sobrecarga
 
     export Produto, newProduto, getNome, getValor, setNome, setValor, toString
     #=
@@ -32,6 +32,6 @@ module ModProduto
         # sobrecarga de toString
         toString(self::Produto) = "$(toString(self.e))Nome: $(self.nome)       Valor:$(self.valor)"
 
-        # Próximo arquivo: Entidades/Totalizavel.jl
+        # Próximo arquivo: Entidades/ModVenda.jl
 
 end
