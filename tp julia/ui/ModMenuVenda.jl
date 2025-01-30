@@ -16,16 +16,16 @@ module ModMenuVenda
 
     newMenuVenda() = MenuVenda(getInstanceDAOVenda(), getInstanceDAOProduto())
 
-    function mostrarTitulo()
-        println("MENU PRODUTOS")
+    function mostrarTitulo(::MenuVenda)
+        println("MENU VENDAS")
     end
 
-    function listar(self::MenuEntidade)
+    function listar(self::MenuVenda)
         println(self.daoVenda.toString()) #refazer
     end
     
 
-    function adicionar(self::MenuEntidade)
+    function adicionar(self::MenuVenda)
         produto::Produto
         venda::Venda
         qtd = 0

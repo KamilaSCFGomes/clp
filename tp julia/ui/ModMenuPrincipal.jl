@@ -3,8 +3,6 @@ module ModMenuPrincipal
     include("./ModMenuProduto.jl")
     include("./ModMenuVenda.jl")
     include("./ModMenuEntidade.jl")
-    using .ModMenuAbstrato, .ModMenuProduto, .ModMenuVenda, .ModMenuEntidade
-    import .ModMenuAbstrato.mostrarTitulo
 
     export MenuPrincipal, newMenuPrincipal
 

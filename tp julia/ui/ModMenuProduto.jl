@@ -6,13 +6,13 @@ module ModMenuProduto
     import .mostrarTitulo, .listar, .adicionar, .remover
     export MenuProduto, newMenuProduto
 
-    struct MenuProduto <: MenuEntidade
+    struct MenuProduto
         dao::DAOProduto
     end
 
     newMenuProduto() = MenuProduto(getInstanceDAOProduto())
         
-    function mostrarTitulo()
+    function mostrarTitulo(::MenuProduto)
         println("MENU PRODUTOS")
     end
 
