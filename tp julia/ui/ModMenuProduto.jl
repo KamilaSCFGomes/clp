@@ -1,27 +1,23 @@
 module ModMenuProduto
-    include("../Entidades/ModEntidade.jl")
+    include("../Entidades/ModProduto.jl")
     include("../data/ModDAOProduto.jl")
-    include("./ModMenuEntidade.jl")
-    using .ModEntidade, .ModDAOProduto, .ModMenuEntidade
-    import .mostrarTitulo, .listar, .adicionar, .remover
-    export MenuProduto, newMenuProduto
+    using .ModProduto, .ModDAOProduto
+    import .ModDAOProduto.adicionar as adicionarDAO, .ModDAOProduto.remover as removerDAO
+
+    export MenuProduto, newMenuProduto, listar, adicionar, remover
 
     struct MenuProduto
         dao::DAOProduto
     end
 
     newMenuProduto() = MenuProduto(getInstanceDAOProduto())
-        
-    function mostrarTitulo(::MenuProduto)
-        println("MENU PRODUTOS")
-    end
 
     function listar(self::MenuProduto)
-        println(self.dao.toString()) 
+        println(toString(self.dao))
     end
 
     function adicionar(self::MenuProduto)
-        nome = nothing
+        nome = ""
         valor = 0.0
 
         while true
@@ -32,39 +28,38 @@ module ModMenuProduto
                 println("Digite o valor: ")
                 valor = parse(Float64, readline())
 
-                # isnothing(nome) equivale a nome == null em outras linguagens
-                if isnothing(nome) || nome == "" || valor <= 0.0
+                if nome == "" || valor <= 0.0
                     throw(ArgumentError("\nFavor informar os dados corretamente.\n"))
                 else
                     break
                 end
             catch ex
-                println("Erro: ", ex.message)
+                println("Erro: ", ex.msg)
             end
         end
         
-        self.dao.adicionar(nome, valor) 
+        adicionarDAO(self.dao.dao, newProduto(nome, valor))
+
     end
 
     function remover(self::MenuProduto)
-        nome = nothing
+        nome = ""
 
         while true
             try
                 println("\nDigite o nome: ")
                 nome = readline()
 
-                if nome == "" || isnothing(nome)
+                if nome == ""
                     throw(ArgumentError("\nFavor informar o nome corretamente.\n"))
                 else
                     break
                 end
             catch ex
-                println("Erro: ", ex.message)
+                println("Erro: ", ex.msg)
             end
         end
 
-        self.dao.remover(nome) 
+        removerDAO(nome, self.dao)
     end
-
 end
