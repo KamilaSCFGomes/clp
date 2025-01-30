@@ -1,7 +1,5 @@
 include("./ui/ModMenuAbstrato.jl")
-include("./ui/ModMenuPrincipal.jl")
-
-using .ModMenuPrincipal, .ModMenuAbstrato
+using .ModMenuAbstrato, .ModMenuAbstrato.ModMenuPrincipal
 
 function main()
     # Criando o scanner (em Julia usamos leitura de entrada padrão)

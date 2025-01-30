@@ -2,7 +2,7 @@ module ModDAOProduto
     include("../Entidades/ModProduto.jl")
     include("./ModDAO.jl")
     using .ModProduto, .ModDAO
-    import .ModDAO.toString
+    import .ModDAO.toString, .ModDAO.buscar, .ModDAO.adicionar, .ModDAO.remover
     export DAOProduto, getInstanceDAOProduto, adicionar, buscar, remover, toString
 
     struct DAOProduto
@@ -21,21 +21,16 @@ module ModDAOProduto
         return SGT_DAOPRODUTO[]
     end
 
-    function adicionar(self::DAOProduto, p::Produto)
-        push!(self.dao, p)
-    end
+    adicionar(self::DAOProduto, p::Produto) = adicionar(self.dao, p)
 
-    function buscar(id::Int64, self::DAOProduto)
-        self.dao.buscar(id, self.dao);
-    end
+    buscar(id::Int64, self::DAOProduto) = buscar(id, self.dao);
 
     function buscar(nome::String, self::DAOProduto)
-        for p in self.dao.getDados()
-            if(p.getNome() == nome)
+        for p in getDados(self.dao)
+            if(getNome(p) == nome)
                 return p
             end
         end
-
         return nothing
     end
 

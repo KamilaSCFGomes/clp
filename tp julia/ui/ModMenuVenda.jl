@@ -1,40 +1,31 @@
 module ModMenuVenda
 
-    include("./ModMenuEntidade.jl")
-    include("../data/ModDAOProduto.jl")
     include("../data/ModDAOVenda.jl")
-    include("../Entidades/ModProduto.jl")
     include("../Entidades/ModVenda.jl")
-    using .ModMenuEntidade, .ModDAOProduto, .ModDAOVenda, .ModProduto, .ModVenda
+    include("./ModMenuProduto.jl")
+    using .ModMenuProduto, .ModMenuProduto.ModDAOProduto, .ModDAOVenda
+    
+    export MenuVenda, newMenuVenda, listar, adicionar, remover
 
-    export MenuVenda, newMenuVenda
-
-    struct MenuVenda <: MenuEntidade
+    struct MenuVenda
         daoVenda::DAOVenda
         daoProduto::DAOProduto
     end
 
     newMenuVenda() = MenuVenda(getInstanceDAOVenda(), getInstanceDAOProduto())
 
-    function mostrarTitulo()
-        println("MENU PRODUTOS")
-    end
+    listar(self::MenuVenda) = println(self.daoVenda.toString())
 
-    function listar(self::MenuEntidade)
-        println(self.daoVenda.toString()) #refazer
-    end
-    
-
-    function adicionar(self::MenuEntidade)
-        produto::Produto
-        venda::Venda
+    function adicionar(self::MenuVenda)
+        produto::Produto = nothing
+        venda::Venda = newVenda()
         qtd = 0
         
         while true
             while true
                 try
                     println("\nDigite o nome do produto: ")
-                    produto = self.daoProduto.buscar(readline())
+                    produto = buscar(self.daoProduto, readline())
 
                     println("Digite a quantidade: ")
                     qtd = parse(Int, readline())
@@ -50,7 +41,7 @@ module ModMenuVenda
             end
         end
         
-        venda.adicionarItem(produto, qtd) #REFAZER
+        adicionarItem(venda, produto, qtd) #REFAZER
 
         print("\nDeseja adicionar outro produto à venda (1-SIM/0-NAO)? ")
 

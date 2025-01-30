@@ -1,12 +1,10 @@
 module ModVenda
-    include("./ModTotalizavel.jl")
     include("./ModEntidade.jl")
     include("./ModProduto.jl")
     using .ModEntidade
-    using .ModTotalizavel
     using .ModProduto
     using Dates
-    import .ModEntidade.toString, .ModTotalizavel.total
+    import .ModEntidade.toString
     export Venda, getDataHora, getItens, toString, adicionarItem!, removerItem!, total, getProduto
 
     # Venda precisa de ItemVenda, então a declaração precisa ocorrer primeiro

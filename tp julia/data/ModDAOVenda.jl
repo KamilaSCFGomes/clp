@@ -3,7 +3,7 @@ module ModDAOVenda
     include("../Entidades/ModProduto.jl")
     include("./ModDAO.jl")
     using .ModVenda, .ModDAO, .ModProduto
-    import .ModDAO.toString
+    import .ModDAO.toString, .ModDAO.buscar, .ModDAO.adicionar, .ModDAO.remover
     export DAOVenda, getInstanceDAOVenda, adicionar, buscar, remover, toString
 
     struct DAOVenda
@@ -23,15 +23,15 @@ module ModDAOVenda
     end
 
     function adicionar(self::DAOVenda, p::Produto)
-        push!(self.dao, p)
+        adicionar(self.dao, p)
     end
 
     function buscar(id::Int64, self::DAOVenda)
-        self.dao.buscar(id, self.dao);
+        buscar(id, self.dao);
     end
 
     function remover(id::Int64, self::DAOVenda)
-        self.dao.remover(id)
+        remover(id, self.dao)
     end
 
     toString(self::DAOVenda) = self.dao.toString()

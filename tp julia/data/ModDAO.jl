@@ -11,9 +11,7 @@ module ModDAO
         
     getDados(self::DAO) = self.dados
 
-    function adicionar(self::DAO, entidade)
-        push!(self.dados, entidade)
-    end
+    adicionar(self::DAO, entidade) = push!(self.dados, entidade)
 
     function buscar(id::Int64, self::DAO)
         for p in self.dados
@@ -25,9 +23,7 @@ module ModDAO
         end
     end
 
-    function remover(id::Int64, self::DAO)
-        filter!(e-> e.getId() != id, self.dados)
-    end
+    remover(id::Int64, self::DAO) = filter!(e-> e.getId() != id, self.dados)
 
     function toString(self::DAO)
         s = ""
@@ -36,4 +32,5 @@ module ModDAO
             s *= "\n" * e.toString()
         end
     end
+    
 end
