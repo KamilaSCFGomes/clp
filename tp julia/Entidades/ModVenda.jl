@@ -1,8 +1,7 @@
 module ModVenda
     include("./ModEntidade.jl")
     include("./ModProduto.jl")
-    using .ModEntidade
-    using .ModProduto
+    using .ModEntidade, .ModProduto
     using Dates
     import .ModEntidade.toString
     export Venda, getDataHora, getItens, toString, adicionarItem!, removerItem!, total, getProduto
@@ -82,5 +81,8 @@ module ModVenda
     end
     
 end
+
+b = newProduto("Produto 1", 10.0)
+
 
 # Próximo arquivo: Entidades/Venda.jl

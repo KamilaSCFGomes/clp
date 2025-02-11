@@ -30,7 +30,7 @@ module ModProduto
         setValor(self::Produto, valor::Float64) = self.valor = valor
 
         # sobrecarga de toString
-        toString(self::Produto) = "$(toString(self.e))Nome: $(self.nome)       Valor:$(self.valor)"
+        toString(self::Produto) = "$(toString(self.e))Nome: $(self.nome)\tValor:$(self.valor)"
 
         # Próximo arquivo: Entidades/Totalizavel.jl
 

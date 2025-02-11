@@ -38,7 +38,7 @@ module ModEntidade
     para concatenar basta chamar a variável utilizando $, como em
     Perl. Também realiza operações, ex "1 + 2 = $(1 + 2)" e funções =#
 
-    toString(self::Entidade) = "Id: $(self.id)     "
+    toString(self::Entidade) = "Id: $(self.id)\t"
 end
 
 # Próximo arquivo: Entidades/Produto.jl
