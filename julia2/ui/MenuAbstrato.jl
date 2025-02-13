@@ -2,11 +2,12 @@ abstract type MenuAbstrato end
 
 function mostrar_menu(menu::MenuAbstrato)
     opcao = 1
-    while opcao != 0
+    while opcao != 0    # laço de repetição com condição no início
         println("\n\n\n")
         mostrar_titulo(menu)
         mostrar_opcoes(menu)
         print("INFORME A SUA OPCAO: ")
+        # parse converte string para um número de um tipo escolhido
         opcao = executar_opcao(menu, parse(Int, readline()))
     end
 end

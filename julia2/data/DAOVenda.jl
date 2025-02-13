@@ -1,4 +1,3 @@
-# DAOVenda.jl
 mutable struct DAOVenda
     dao::DAO{Venda}
 
@@ -22,6 +21,7 @@ function buscar(dao_venda::DAOVenda, id::Int64)
     return buscar(dao_venda.dao, id)
 end
 
+#função de alta ordem: utilizando uma comparação com uma função lambda como parâmetro
 function remover!(dao_venda::DAOVenda, id::Int64)
     remover!(dao_venda.dao, id)
 end

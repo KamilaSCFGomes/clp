@@ -1,4 +1,3 @@
-# MenuPrincipal.jl
 mutable struct MenuPrincipal <: MenuAbstrato
     menu_produto::MenuProduto
     menu_venda::MenuVenda
@@ -9,10 +8,10 @@ mutable struct MenuPrincipal <: MenuAbstrato
 end
 
 function executar_opcao(menu::MenuPrincipal, opcao::Int)
-    if opcao == 0
+    if opcao == 0 # não possui estrutura de seleção múltipla
         return 0
     elseif opcao == 1
-        mostrar_menu(menu.menu_produto)
+        mostrar_menu(menu.menu_produto) # dispacho múltiplo: mostrar menu pode chamar a execução para MenuProduto ou para MenuVenda
     elseif opcao == 2
         mostrar_menu(menu.menu_venda)
     else

@@ -1,10 +1,7 @@
-# Main.jl
 using Printf
 
-# Carregando os arquivos na ordem correta
 include("entidades/Entidade.jl")
 include("entidades/Produto.jl")
-include("entidades/Totalizavel.jl")
 include("entidades/Venda.jl")
 
 include("data/DAO.jl")
@@ -13,16 +10,13 @@ include("data/DAOVenda.jl")
 
 include("ui/MenuAbstrato.jl")
 include("ui/MenuEntidade.jl")
-include("ui/MenuProduto.jl")  # MenuProduto.jl deve ser carregado antes de MenuPrincipal.jl
-include("ui/MenuVenda.jl")    # MenuVenda.jl deve ser carregado antes de MenuPrincipal.jl
+include("ui/MenuProduto.jl") # a ordem dos imports importa
+include("ui/MenuVenda.jl")
 include("ui/MenuPrincipal.jl")
 
-# Função principal
-function main()
-    # Inicia o menu principal
+function 🤠() # aceita unicode como input e como parte do código, incluindo emojis.
     menu_principal = MenuPrincipal()
-    mostrar_menu(menu_principal)
+    mostrar_menu(menu_principal) 
 end
 
-# Executa o programa
-main()
+🤠()

@@ -1,4 +1,3 @@
-# MenuVenda.jl
 mutable struct MenuVenda <: MenuEntidade
     dao_venda::DAOVenda
     dao_produto::DAOProduto
@@ -18,7 +17,7 @@ end
 
 function adicionar(menu::MenuVenda)
     venda = Venda()
-    produto = nothing
+    produto = nothing # null
     qtd = 0
 
     while true
@@ -29,12 +28,14 @@ function adicionar(menu::MenuVenda)
                 print("Digite a quantidade: ")
                 qtd = parse(Int, readline())
 
-                if produto === nothing || qtd <= 0
+                if produto === nothing || qtd <= 0 ## == compara o valor, === compara a referência
+                    # ex: 1 == 1.0 é verdadeiro, 1 === 1.0 é falso
+                    #     a=2, b=2, a == b é verdadeiro, a === b é falso
                     throw(ErrorException("\nFavor informar os dados corretamente.\n"))
                 else
                     break
                 end
-            catch ex
+            catch ex # tratamento de exceção
                 println(ex.msg)
             end
         end
@@ -42,9 +43,10 @@ function adicionar(menu::MenuVenda)
         adicionar_item!(venda, produto, qtd)
 
         print("\nDeseja adicionar outro produto à venda (1-SIM/0-NAO)? ")
-        if parse(Int, readline()) != 1
-            break
-        end
+
+        # uso de avaliação em curto-circuito para estrutura de seleção (condicional):
+        (parse(Int, readline()) != 1) && break
+        
     end
 
     println("\n\nNOTA FISCAL\n", venda)

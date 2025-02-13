@@ -1,4 +1,3 @@
-# MenuProduto.jl
 mutable struct MenuProduto <: MenuEntidade
     dao::DAOProduto
 
@@ -26,12 +25,12 @@ function adicionar(menu::MenuProduto)
             print("Digite o valor: ")
             valor = parse(Float64, readline())
 
-            if isempty(nome) || valor <= 0.0
+            if isempty(nome) || valor <= 0.0 # não precisa de parênteses para estrutura de controle
                 throw(ErrorException("\nFavor informar os dados corretamente.\n"))
             else
                 break
             end
-        catch ex
+        catch ex # tratamento de exceção
             println(ex.msg)
         end
     end
@@ -47,7 +46,7 @@ function remover(menu::MenuProduto)
             print("\nDigite o nome: ")
             nome = readline()
 
-            if isempty(nome)
+            if isempty(nome) # equivalente ao == null
                 throw(ErrorException("\nFavor informar o nome corretamente.\n"))
             else
                 break

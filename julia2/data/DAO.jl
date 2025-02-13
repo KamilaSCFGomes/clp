@@ -1,6 +1,5 @@
-# DAO.jl
-mutable struct DAO{E <: Entidade}
-    dados::Vector{E}
+mutable struct DAO{E <: Entidade} # tipo genérico DAO que herda de Entidade
+    dados::Vector{E}  #tipagem explícita
 
     function DAO{E}() where {E <: Entidade}
         new{E}(Vector{E}())
@@ -24,8 +23,9 @@ function buscar(dao::DAO, id::Int64)
     return nothing
 end
 
+#função de alta ordem: utilizando uma comparação com uma função lambda como parâmetro
 function remover!(dao::DAO, id::Int64)
-    filter!(e -> get_id(e) != id, dao.dados)
+    filter!(🦍 -> get_id(🦍) != id, dao.dados)
 end
 
 function Base.show(io::IO, dao::DAO)

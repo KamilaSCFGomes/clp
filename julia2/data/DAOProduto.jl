@@ -1,4 +1,3 @@
-# DAOProduto.jl
 mutable struct DAOProduto
     dao::DAO{Produto}
 
@@ -8,6 +7,7 @@ mutable struct DAOProduto
 end
 
 # Singleton instance para DAOProduto
+# pode ser implementado utilizando constante ou uma estrutura vazia
 const instance_produto = DAOProduto()
 
 function get_instance_produto()
@@ -28,6 +28,7 @@ function buscar(dao_produto::DAOProduto, nome::String)
             return produto
         end
     end
+    
     return nothing
 end
 
@@ -35,8 +36,9 @@ function remover!(dao_produto::DAOProduto, id::Int64)
     remover!(dao_produto.dao, id)
 end
 
+#função de alta ordem: utilizando uma comparação com uma função lambda como parâmetro
 function remover!(dao_produto::DAOProduto, nome::String)
-    filter!(p -> get_nome(p) != nome, get_dados(dao_produto.dao))
+    filter!(🤰 -> get_nome(🤰) != nome, get_dados(dao_produto.dao))
 end
 
 function Base.show(io::IO, dao_produto::DAOProduto)
